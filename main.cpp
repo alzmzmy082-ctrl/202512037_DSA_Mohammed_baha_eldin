@@ -1,52 +1,58 @@
-#include "student.h"
+#include <iostream>
+#include "LibraryBook.h"
+#include "Functions.h"
+
+using namespace std;
 
 int main() {
-
+    LibraryBook bookList[MAX_BOOKS];
+    int currentBookCount = 0;
     int choice;
 
     do {
-        cout << "\n===== STUDENT MANAGEMENT SYSTEM =====\n";
-        cout << "1. Add Student\n";
-        cout << "2. Display Students\n";
-        cout << "3. Search Student\n";
-        cout << "4. Update Student\n";
-        cout << "5. Delete Student\n";
-        cout << "6. Exit\n";
-
-        cout << "Enter Your Choice: ";
+        cout << "\n=========================================\n";
+        cout << "     Library Book Borrowing System       \n";
+        cout << "=========================================\n";
+        cout << "1. Add New Book\n";
+        cout << "2. Display All Books\n";
+        cout << "3. Borrow Book\n";
+        cout << "4. Return Book\n";
+        cout << "5. Search Book by ID\n";
+        cout << "6. Display Overdue Books\n";
+        cout << "7. Calculate Total Fines\n";
+        cout << "8. Exit\n";
+        cout << "Enter your choice (1-8): ";
         cin >> choice;
 
         switch (choice) {
-
             case 1:
-                addStudent();
+                addBook(bookList, currentBookCount);
                 break;
-
             case 2:
-                displayStudents();
+                displayBooks(bookList, currentBookCount);
                 break;
-
             case 3:
-                searchStudent();
+                borrowBookMenu(bookList, currentBookCount);
                 break;
-
             case 4:
-                updateStudent();
+                returnBookMenu(bookList, currentBookCount);
                 break;
-
             case 5:
-                deleteStudent();
+                searchBook(bookList, currentBookCount);
                 break;
-
             case 6:
-                cout << "Program Ended.\n";
+                displayOverdueBooks(bookList, currentBookCount);
                 break;
-
+            case 7:
+                calculateTotalFines(bookList, currentBookCount);
+                break;
+            case 8:
+                cout << "Exiting the system. Thank you!\n";
+                break;
             default:
-                cout << "Invalid Choice.\n";
+                cout << "Invalid choice! Please try again.\n";
         }
-
-    } while (choice != 6);
+    } while (choice != 8);
 
     return 0;
 }
