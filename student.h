@@ -1,22 +1,16 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <iostream>
 #include <string>
-
-using namespace std;
+#include <vector>
 
 struct Student {
-    int id;
-    string name;
+    std::string id;
+    std::string name;
     int age;
-    string course;
 };
 
-void addStudent();
-void displayStudents();
-void searchStudent();
-void updateStudent();
-void deleteStudent();
 
-#endif
+void saveStudentsToCSV(const std::vector<Student>& students, const std::string& filename);
+
+#endif 

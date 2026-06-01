@@ -1,58 +1,43 @@
 #include <iostream>
-#include "LibraryBook.h"
-#include "Functions.h"
+#include <string>
+#include <vector>
+#include "student.h"
 
 using namespace std;
 
 int main() {
-    LibraryBook bookList[MAX_BOOKS];
-    int currentBookCount = 0;
-    int choice;
+    int numberOfStudents;
+    vector<Student> students;
 
-    do {
-        cout << "\n=========================================\n";
-        cout << "     Library Book Borrowing System       \n";
-        cout << "=========================================\n";
-        cout << "1. Add New Book\n";
-        cout << "2. Display All Books\n";
-        cout << "3. Borrow Book\n";
-        cout << "4. Return Book\n";
-        cout << "5. Search Book by ID\n";
-        cout << "6. Display Overdue Books\n";
-        cout << "7. Calculate Total Fines\n";
-        cout << "8. Exit\n";
-        cout << "Enter your choice (1-8): ";
-        cin >> choice;
+    cout << "=== Student Data Entry ===" << endl;
+    cout << "Enter the number of students to add: ";
+    cin >> numberOfStudents;
+    cin.ignore(); 
 
-        switch (choice) {
-            case 1:
-                addBook(bookList, currentBookCount);
-                break;
-            case 2:
-                displayBooks(bookList, currentBookCount);
-                break;
-            case 3:
-                borrowBookMenu(bookList, currentBookCount);
-                break;
-            case 4:
-                returnBookMenu(bookList, currentBookCount);
-                break;
-            case 5:
-                searchBook(bookList, currentBookCount);
-                break;
-            case 6:
-                displayOverdueBooks(bookList, currentBookCount);
-                break;
-            case 7:
-                calculateTotalFines(bookList, currentBookCount);
-                break;
-            case 8:
-                cout << "Exiting the system. Thank you!\n";
-                break;
-            default:
-                cout << "Invalid choice! Please try again.\n";
-        }
-    } while (choice != 8);
+    
+    for (int i = 0; i < numberOfStudents; i++) {
+        Student s;
+        cout << "\n--- Student " << (i + 1) << " ---" << endl;
+        
+        cout << "Enter Student ID (e.g., 202312051): ";
+        getline(cin, s.id);
+        
+        cout << "Enter Student Name: ";
+        getline(cin, s.name);
+        
+        cout << "Enter Student Age: ";
+        cin >> s.age;
+        cin.ignore(); 
+
+        students.push_back(s); 
+    }
+
+    
+    saveStudentsToCSV(students, "student.txt");
+
+    cout << "\n=============================================" << endl;
+    cout << "Data has been successfully saved to 'student.txt'" << endl;
+    cout << "=============================================" << endl;
 
     return 0;
 }
